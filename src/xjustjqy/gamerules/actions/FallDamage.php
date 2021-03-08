@@ -8,9 +8,6 @@ use pocketmine\Server;
 use pocketmine\event\entity\EntityDamageEvent;
 
 class FallDamage extends Action {
-    
-    /** @var bool */
-    private $cancel = false;
  
     public function __construct(Plugin $register) {
        $this->register($register);
@@ -18,11 +15,7 @@ class FallDamage extends Action {
     }
   
     public function onDamage(EntityDamageEvent $event) {
-      if($event->getCause() === EntityDamageEvent::CAUSE_FALL && $this->cancel) $event->setCancelled($this->cancel);
-    }
-  
-    public function toggle(bool $which = false) {
-      $this->cancel = $which; 
+      if($event->getCause() === EntityDamageEvent::CAUSE_FALL && $this->isCancelled()) $event->setCancelled($this->isCancelled());
     }
   
 }
