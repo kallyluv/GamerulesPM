@@ -13,7 +13,11 @@ use Closure;
 
 function setInterval(Closure $callback, int $delay) {
   Main::fetch()->getScheduler()->scheduleRepeatingTask($task = new ClosureTask($callback), $delay);
-  return $task;
+  return $task->getTaskId();
+}
+
+function stopInterval(int $id) {
+  Main::fetch()->getScheduler()->cancelTask($id); 
 }
 
 class DaylightCycle extends Action {
