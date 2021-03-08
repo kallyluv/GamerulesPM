@@ -20,7 +20,6 @@ class Action implements Listener {
     }
  
     public function addListener($listener, $callback) {
-      if(!isset($this->listeners[$listener])) $this->listeners[$listener] = [];
       $this->listeners[$listener] = $callback;
     }
    
