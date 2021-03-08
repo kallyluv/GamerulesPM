@@ -21,15 +21,18 @@ class Action implements Listener {
  
     public function addListener($listener, $callback) {
       if(!isset($this->listeners[$listener])) $this->listeners[$listener] = [];
-      $this->listeners[$listener][] = $callback;
+      $this->listeners[$listener] = $callback;
+    }
+   
+    public function removeListener($listener) {
+      if(!isset($this->listeners[$listener])) return;
+      unset($this->listeners[$listener]);
     }
  
     public function onEvent(Event $event) {
       $name = $event->getEventName();
-      if(is_null($name)) return;
-      foreach($this->listeners[$name] as $callback) {
-        $this->{$callback}($event);
-      }
+      if(is_null($name) || !isset($this->listeners[$name])) return;
+      $this->{$this->listeners[$name]}($event);
     }
   
     public function isCancelled() {
