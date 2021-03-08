@@ -31,6 +31,10 @@ class Action implements Listener {
     public function onEvent(Event $event) {
       $name = $event->getEventName();
       if(is_null($name) || !isset($this->listeners[$name])) return;
+      if(is_callable($this->listeners[$name])) {
+        ($this->listeners[$name])($event);
+        return;
+      }
       $this->{$this->listeners[$name]}($event);
     }
   
