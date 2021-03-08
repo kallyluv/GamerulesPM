@@ -2,7 +2,6 @@
 
 namespace xjustjqy\gamerules\actions;
 
-use pocketmine\event\Listener;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 
@@ -15,7 +14,7 @@ class FallDamage extends Action {
  
     public function __construct(Plugin $register) {
        $this->register($register);
-       $this->addListener(EntityDamageEvent::class, "onDamage");
+       $this->addListener("EntityDamageEvent", "onDamage");
     }
   
     public function onDamage(EntityDamageEvent $event) {
