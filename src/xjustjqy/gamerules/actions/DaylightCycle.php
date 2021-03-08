@@ -21,7 +21,7 @@ class DaylightCycle extends Action {
     /** @var Plugin */
     private $plugin;
 
-    private $lastTime;
+    private $lastTime = null;
  
     public function __construct(Plugin $register) {
       $this->register($register); 
@@ -30,7 +30,7 @@ class DaylightCycle extends Action {
         if(!$this->isCancelled()) return;
         $level = Server::getInstance()->getDefaultLevel();
         $time = $level->getTime();
-        if(!isset($this->lastTime)) $this->lastTime = $time;
+        if(is_null($this->lastTime)) $this->lastTime = $time;
         foreach(Server::getInstance()->getLevels() as $level) {
           $time = $level->getTime();
           if($this->lastTime !== $time) {
