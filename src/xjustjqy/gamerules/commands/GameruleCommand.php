@@ -15,7 +15,7 @@ class GameruleCommand extends Command {
     parent::__construct("gamerule", "Change gamerules!", "/gamerule <rule> <value(s)>", []);
     $this->setDescription("Change gamerules!");
     $this->setPermission("pocketmine.command.gamerule");
-    $path = "xjustjqy\gamerules\actions\\";
+    $path = Main::fetch()->getFile() . "src\xjustjqy\gamerules\actions\\";
     $this->actions = [
       "falldamage" => new ($path . "FallDamage")(Main::fetch()),
       "keepinventory" => new ($path . "KeepInventory")(Main::fetch()),
