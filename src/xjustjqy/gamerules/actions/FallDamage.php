@@ -8,13 +8,14 @@ use pocketmine\Server;
 
 use pocketmine\event\entity\EntityDamageEvent;
 
-class FallDamage implements Listener {
+class FallDamage extends Action {
     
     /** @var bool */
     private $cancel = false;
  
     public function __construct(Plugin $register) {
-       Server::getInstance()->getPluginManager()->registerEvents($this, $register);
+       $this->register($register);
+       $this->addListener(EntityDamageEvent::class, "onDamage");
     }
   
     public function onDamage(EntityDamageEvent $event) {
